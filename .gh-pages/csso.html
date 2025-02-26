@@ -34,7 +34,10 @@
         </div>
         <div id="output"><div class="content"></div></div>
         <div class="change-log-toggle">Show transformations log</div>
-        <div id="transformations-log"><div class="content"></div></div>
+        <div id="transformations-log">
+            <div class="content"></div>
+            <button id="copyAllBtn">Copy all</button>
+        </div>
         <div class="stat-block">
             <div id="stat"></div>
             <div class="powered">
@@ -214,6 +217,16 @@
 
         document.getElementById('version').innerHTML = csso.version;
         process();
+
+    function copyAllContent() {
+           const outputContent = document.querySelector('#output .content').textContent;
+           navigator.clipboard.writeText(outputContent).then(() => {
+               alert('Copied to clipboard!');
+           }).catch(err => {
+               alert('Failed to copy: ' + err);
+           });
+       }
+       document.getElementById('copyAllBtn').addEventListener('click', copyAllContent);
     </script>
 
 </body>
